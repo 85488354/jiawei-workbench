@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家委会工作台 · 许昌市第一中学 2025级2班</title>
+<style>
+:root{
+  --primary:#177a68; --primary-dark:#0e5c4e; --primary-light:#e3f2ee;
+  --accent:#e8842c; --accent-light:#fdf0e2;
+  --bg:#f4f6f4; --card:#ffffff; --text:#26312e; --text2:#68746f;
+  --border:#e2e7e4; --blue:#2f6fb3; --blue-light:#e8f0fa;
+  --red:#c05046; --shadow:0 2px 10px rgba(23,60,50,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+.app{display:flex;min-height:100vh}
+.sidebar{width:212px;background:linear-gradient(180deg,var(--primary-dark),#0a4438);color:#dfe9e5;position:fixed;top:0;left:0;bottom:0;padding:22px 0;display:flex;flex-direction:column;z-index:50}
+.side-brand{padding:0 20px 18px;border-bottom:1px solid rgba(255,255,255,.14);margin-bottom:12px}
+.side-brand .logo{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px}
+.side-brand h1{font-size:16px;color:#fff;letter-spacing:1px}
+.side-brand p{font-size:11.5px;opacity:.75;margin-top:3px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 20px;cursor:pointer;font-size:14.5px;border-left:3px solid transparent;transition:.15s;user-select:none}
+.nav-item:hover{background:rgba(255,255,255,.08)}
+.nav-item.active{background:rgba(255,255,255,.13);border-left-color:var(--accent);color:#fff;font-weight:700}
+.nav-item .ico{width:20px;text-align:center;font-size:16px}
+.side-foot{margin-top:auto;padding:14px 20px;font-size:11px;opacity:.6;line-height:1.7}
+.main{margin-left:212px;flex:1;padding:26px 34px 90px;max-width:1240px}
+.topbar{display:flex;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.topbar .page-title{font-size:23px;font-weight:800;color:var(--primary-dark)}
+.topbar .page-sub{font-size:13px;color:var(--text2)}
+.top-actions{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.searchbox{position:relative}
+.searchbox input{width:220px;padding:9px 14px 9px 36px;border:1.5px solid var(--border);border-radius:22px;font-size:13.5px;background:var(--card);outline:none;font-family:inherit}
+.searchbox input:focus{border-color:var(--primary)}
+.searchbox .s-ico{position:absolute;left:13px;top:9px;font-size:14px;color:var(--text2)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:none;border-radius:20px;padding:9px 18px;font-size:13.5px;cursor:pointer;font-family:inherit;font-weight:700;transition:.15s}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.primary:hover{background:var(--primary-dark)}
+.btn.ghost{background:var(--card);color:var(--primary-dark);border:1.5px solid var(--border)}
+.btn.ghost:hover{border-color:var(--primary)}
+.btn.warn{background:var(--red);color:#fff}
+.btn.small{padding:4px 12px;font-size:12px;border-radius:14px}
+body.admin .btn.admin-only{display:inline-flex}
+.btn.admin-only{display:none}
+.section{display:none;animation:fadein .25s}
+.section.active{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:24px}
+.stat{background:var(--card);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-16px;top:-16px;width:64px;height:64px;border-radius:50%;background:var(--primary-light)}
+.stat.orange::after{background:var(--accent-light)}
+.stat.blue::after{background:var(--blue-light)}
+.stat .num{font-size:32px;font-weight:800;color:var(--primary-dark);line-height:1.2}
+.stat.orange .num{color:var(--accent)}
+.stat.blue .num{color:var(--blue)}
+.stat .lbl{font-size:13px;color:var(--text2);margin-top:2px}
+.panel{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:22px 24px;margin-bottom:20px}
+.panel h3{font-size:16.5px;color:var(--primary-dark);margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.panel h3::before{content:"";width:4px;height:18px;background:var(--accent);border-radius:2px;display:inline-block}
+.two-col{display:grid;grid-template-columns:1.25fr 1fr;gap:20px}
+@media(max-width:1000px){.two-col{grid-template-columns:1fr}}
+.tl{list-style:none;position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--border)}
+.tl li{position:relative;padding:0 0 16px 14px;font-size:13.5px}
+.tl li::before{content:"";position:absolute;left:-21px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--primary-light)}
+.tl li .d{font-weight:700;color:var(--primary-dark)}
+.tl li .s{color:var(--text2);font-size:12.5px}
+.filter-row{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.chip{padding:6px 16px;border-radius:18px;border:1.5px solid var(--border);background:var(--card);font-size:13px;cursor:pointer;color:var(--text2);user-select:none;transition:.15s}
+.chip.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}
+.act-card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;border-left:5px solid var(--primary)}
+.act-card.sem2{border-left-color:var(--accent)}
+.act-head{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;flex-wrap:wrap}
+.act-head .no{width:38px;height:38px;min-width:38px;border-radius:10px;background:var(--primary-light);color:var(--primary-dark);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:16px}
+.act-card.sem2 .no{background:var(--accent-light);color:#b35f10}
+.act-head .tt{font-size:15.5px;font-weight:700;flex:1;min-width:220px}
+.act-head .meta{font-size:12.5px;color:var(--text2)}
+.badge{display:inline-block;font-size:11.5px;padding:2px 10px;border-radius:10px;background:var(--blue-light);color:var(--blue);font-weight:700;margin-left:6px;white-space:nowrap}
+.badge.done{background:var(--primary-light);color:var(--primary-dark)}
+.badge.plan{background:#f3e8fa;color:#7b3fa0}
+.badge.sem{background:#f0ede7;color:#7a6a45}
+.act-head .arrow{transition:.2s;color:var(--text2);font-size:13px}
+.act-card.open .arrow{transform:rotate(180deg)}
+.act-body{display:none;padding:4px 22px 20px;border-top:1px dashed var(--border)}
+.act-card.open .act-body{display:block}
+.kv{display:grid;grid-template-columns:88px 1fr;gap:4px 12px;font-size:13.5px;margin-top:14px}
+.kv .k{color:var(--text2);font-weight:700}
+.photo-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.photo-wall .ph{position:relative}
+.photo-wall img{width:100%;height:110px;object-fit:cover;border-radius:8px;cursor:zoom-in;display:block;transition:.15s;border:1px solid var(--border)}
+.photo-wall img:hover{transform:scale(1.03);box-shadow:var(--shadow)}
+.ph .rm{display:none;position:absolute;top:4px;right:4px;background:var(--red);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:1}
+body.admin .ph .rm{display:block}
+.file-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.file-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;background:#f5f7f5;border:1px solid var(--border);padding:5px 12px;border-radius:8px;color:var(--text);transition:.15s;position:relative}
+.file-link:hover{border-color:var(--primary);color:var(--primary-dark);text-decoration:none;background:var(--primary-light)}
+.file-link .ft{font-weight:800;font-size:10.5px;color:#fff;background:var(--text2);border-radius:4px;padding:1px 5px}
+.ft.docx,.ft.doc{background:#2f6fb3}.ft.xlsx,.ft.xls{background:#1a7f4e}.ft.html{background:#c05046}.ft.txt{background:#8a7f6a}.ft.jpg,.ft.png,.ft.dir{background:var(--accent)}
+.file-link .rm{display:none;background:none;border:none;color:var(--red);cursor:pointer;font-size:13px;padding:0 2px}
+body.admin .file-link .rm{display:inline}
+.duty-mini{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.duty-mini th{background:var(--primary-light);color:var(--primary-dark);padding:8px 10px;text-align:left;font-size:12.5px}
+.duty-mini td{padding:8px 10px;border-bottom:1px solid var(--border)}
+table.data{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card)}
+table.data th{background:var(--primary);color:#fff;padding:11px 14px;text-align:left;font-size:13px;font-weight:700}
+table.data td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+table.data tr:hover td{background:#fafcfa}
+td .op{display:none;gap:6px}
+body.admin td .op{display:flex}
+.role-tag{display:inline-block;background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:2px 12px;border-radius:12px;white-space:nowrap}
+.role-tag.r2{background:var(--blue)}.role-tag.r3{background:var(--accent)}.role-tag.r4{background:#7a6a45}
+.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.member-card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;position:relative}
+.member-card .top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.avatar{width:42px;height:42px;min-width:42px;border-radius:50%;background:var(--primary-light);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px}
+.member-card .name{font-weight:700;font-size:15px}
+.member-card .duty{font-size:12.5px;color:var(--text2);margin-top:14px;background:#f7f9f7;border-radius:8px;padding:10px 12px;line-height:1.6}
+.phone{color:var(--text2);font-size:12.5px;letter-spacing:.3px}
+.mops{display:none;position:absolute;top:12px;right:12px;gap:6px}
+body.admin .mops{display:flex}
+.ib{width:26px;height:26px;border-radius:8px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:13px;line-height:1}
+.ib.del{color:var(--red)}
+.student-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.stu{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 6px 7px 6px;text-align:center;font-size:13px;position:relative}
+.stu .n{position:absolute;left:6px;top:6px;font-size:9.5px;color:#b9c2bd}
+.stu.g1{border-top:3px solid var(--primary)}
+.stu.g2{border-top:3px solid var(--blue)}
+.stu.g3{border-top:3px solid var(--accent)}
+.stu.gk{border-top:3px solid #7a6a45}
+.stu .sops{display:none;position:absolute;top:2px;right:2px;gap:3px}
+body.admin .stu .sops{display:flex}
+body.admin .stu{padding-top:20px}
+.stu .sops button{width:18px;height:18px;font-size:10px;border-radius:4px;border:1px solid var(--border);background:#fff;cursor:pointer;line-height:1;padding:0}
+.stu .sops .del{color:var(--red)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--text2);margin:10px 0 14px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.img-frame{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}
+.img-frame img{width:100%;display:block;cursor:zoom-in}
+#lightbox{position:fixed;inset:0;background:rgba(10,20,16,.88);display:none;align-items:center;justify-content:center;z-index:200;cursor:zoom-out}
+#lightbox.show{display:flex}
+#lightbox img{max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+.note{background:var(--accent-light);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#7a4a10;margin-top:14px}
+.note.blue{background:var(--blue-light);border-color:var(--blue);color:#274d73}
+.hidden-by-search{display:none!important}
+.empty-hint{display:none;text-align:center;color:var(--text2);padding:30px;font-size:14px}
+#adminBar{position:fixed;left:212px;right:0;bottom:0;background:#123c33;color:#e8f2ee;padding:10px 24px;display:none;align-items:center;gap:12px;z-index:90;flex-wrap:wrap;box-shadow:0 -4px 16px rgba(0,0,0,.18)}
+body.admin #adminBar{display:flex}
+#adminBar .dot{width:9px;height:9px;border-radius:50%;background:#7fd1b9;display:inline-block;margin-right:6px}
+#adminBar.dirty .dot{background:#ffb020;animation:blink 1s infinite alternate}
+@keyframes blink{to{opacity:.4}}
+#adminBar .spacer{margin-left:auto}
+#modalMask{position:fixed;inset:0;background:rgba(20,35,30,.45);display:none;align-items:flex-start;justify-content:center;z-index:150;overflow:auto;padding:40px 16px}
+#modalMask.show{display:flex}
+.modal{background:#fff;border-radius:16px;width:640px;max-width:96vw;padding:26px 28px;box-shadow:0 12px 48px rgba(0,0,0,.25)}
+.modal h3{font-size:17px;color:var(--primary-dark);margin-bottom:18px}
+.fg{margin-bottom:13px}
+.fg label{display:block;font-size:12.5px;font-weight:700;color:var(--text2);margin-bottom:4px}
+.fg input[type=text],.fg input[type=date],.fg select,.fg textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13.5px;font-family:inherit;outline:none}
+.fg input:focus,.fg textarea:focus{border-color:var(--primary)}
+.fg textarea{resize:vertical;min-height:60px}
+.frow{display:flex;gap:10px;align-items:flex-end;margin-bottom:8px}
+.frow input{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;font-family:inherit;outline:none}
+.frow .rmrow{border:none;background:#fdeceb;color:var(--red);border-radius:8px;width:32px;height:34px;cursor:pointer}
+.sub-list .frow:first-child{margin-top:4px}
+.modal-foot{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:#123c33;color:#fff;padding:11px 26px;border-radius:24px;font-size:13.5px;z-index:300;transition:.3s;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:80vw}
+#toast.show{transform:translateX(-50%) translateY(0)}
+/* 隐私保护：非管理模式下图片轻微模糊 */
+body:not(.admin) .photo-wall img,
+body:not(.admin) .img-frame img,
+body:not(.admin) #lightbox img{filter:blur(4px)}
+body:not(.admin) #lightbox{cursor:default}
+.fg input[type=password]{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13.5px;font-family:inherit;outline:none}
+.fg input[type=password]:focus{border-color:var(--primary)}
+@media print{
+  .sidebar,.topbar,.searchbox,.filter-row,#adminBar,.modal,.mops,.sops,.rm,.op,.btn{display:none!important}
+  .main{margin:0;padding:0}
+  .section{display:block!important;page-break-after:always}
+  .act-body{display:block!important}
+  body{background:#fff}
+}
+@media(max-width:860px){
+  .sidebar{width:100%;height:auto;position:static;flex-direction:column;padding:14px}
+  .main{margin-left:0;padding:18px 18px 90px}
+  .app{flex-direction:column}
+  #adminBar{left:0}
+  .nav-item{padding:9px 6px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="side-brand">
+    <div class="logo">🏫</div>
+    <h1>家委会工作台</h1>
+    <p id="sideSub">许昌市第一中学 · 2025级2班</p>
+  </div>
+  <nav id="nav">
+    <div class="nav-item active" data-target="sec-overview"><span class="ico">📊</span>总览面板</div>
+    <div class="nav-item" data-target="sec-activities"><span class="ico">🎯</span>活动档案</div>
+    <div class="nav-item" data-target="sec-members"><span class="ico">👥</span>家委会成员</div>
+    <div class="nav-item" data-target="sec-duty"><span class="ico">🛡️</span>护学岗</div>
+    <div class="nav-item" data-target="sec-meal"><span class="ico">🍱</span>陪餐管理</div>
+    <div class="nav-item" data-target="sec-roster"><span class="ico">📖</span>班级名录</div>
+    <div class="nav-item" data-target="sec-files"><span class="ico">📁</span>材料库</div>
+  </nav>
+  <div class="side-foot" id="sideFoot"></div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="page-title" id="topTitle">总览面板</div>
+      <div class="page-sub" id="topSub"></div>
+    </div>
+    <div class="top-actions">
+      <div class="searchbox"><span class="s-ico">🔍</span><input id="globalSearch" type="text" placeholder="搜索活动 / 成员 / 学生…"></div>
+      <button class="btn ghost" id="adminToggle">✏️ 管理模式</button>
+    </div>
+  </div>
+
+  <section class="section active" id="sec-overview"><div id="overviewBody"></div></section>
+
+  <section class="section" id="sec-activities">
+    <div class="filter-row" id="actFilter"></div>
+    <div class="empty-hint" id="actEmpty">没有匹配的活动</div>
+    <div id="actList"></div>
+  </section>
+
+  <section class="section" id="sec-members"><div id="membersBody"></div></section>
+  <section class="section" id="sec-duty"><div id="dutyBody"></div></section>
+  <section class="section" id="sec-meal"><div id="mealBody"></div></section>
+  <section class="section" id="sec-roster"><div id="rosterBody"></div></section>
+  <section class="section" id="sec-files"><div id="filesBody"></div></section>
+</div>
+</div>
+
+<div id="adminBar">
+  <span><span class="dot"></span><b>管理模式</b>　<span id="dirtyHint">点击各模块的 ✏️/＋ 按钮进行维护</span></span>
+  <span class="spacer"></span>
+  <button class="btn ghost small" id="btnBaseDir">🗂 材料库路径</button>
+  <button class="btn ghost small" id="btnExport">📤 导出JSON备份</button>
+  <button class="btn ghost small" id="btnImport">📥 导入备份</button>
+  <button class="btn primary small" id="btnSave">💾 保存数据</button>
+</div>
+
+<div id="modalMask"><div class="modal" id="modalBox"></div></div>
+<div id="lightbox"><img src="" alt=""></div>
+<div id="toast"></div>
+<input type="file" id="jsonFileInput" accept=".json" style="display:none">
+
+<script src="工作台数据.js"></script>
+<script>
+/* ================= 核心状态 ================= */
+let DATA = window.JW_DATA;
+let dirty = false, adminMode = false, savedHandle = null;
+const esc = s => String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+/* ---------- 隐私脱敏（非管理模式生效） ---------- */
+let _plist=null;
+function nameList(){
+  if(_plist) return _plist;
+  const set=new Set();
+  (DATA.students||[]).forEach(s=>set.add(s.name));
+  (DATA.jiaweiKids||[]).forEach(n=>set.add(n));
+  (DATA.members||[]).forEach(m=>{ const mm=String(m.name).match(/[\u4e00-\u9fa5]{2,4}(?=爸爸|妈妈|家长)/g); if(mm)mm.forEach(x=>set.add(x)); });
+  (DATA.duty?.rows||[]).forEach(r=>{ if(r.leader)set.add(r.leader.trim()); String(r.members||'').split(/[、，,;；\s]+/).forEach(x=>x&&set.add(x.trim())); });
+  _plist=[...set].filter(n=>n&&n.length>=2).sort((a,b)=>b.length-a.length);
+  return _plist;
+}
+function privacy(s){
+  if(adminMode) return String(s??'');
+  let t=String(s??'');
+  const list=nameList();
+  if(list.length){
+    const re=new RegExp(list.map(n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
+    t=t.replace(re,m=> m[0]+'*'.repeat(m.length-1));
+  }
+  t=t.replace(/(1[3-9]\d)\d{5}(\d{3})/g,'$1*****$2');
+  return t;
+}
+const mt  = s => esc(privacy(s));   /* 纯文本显示 */
+const mth = s => privacy(s);        /* 含<b>等HTML的显示 */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const uid = p => p + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+
+function markDirty(){ dirty=true; $('#adminBar').classList.add('dirty'); $('#dirtyHint').textContent='有未保存的修改 — 点击右侧「💾 保存数据」写回文件'; }
+function clearDirty(){ dirty=false; $('#adminBar').classList.remove('dirty'); $('#dirtyHint').textContent='点击各模块的 ✏️/＋ 按钮进行维护'; }
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),3400); }
+window.addEventListener('beforeunload',e=>{ if(dirty){e.preventDefault();e.returnValue='';} });
+
+function fileUrl(path,isDir){
+  const base=(DATA.site.baseDir||'').replace(/\\/g,'/').replace(/\/$/,'');
+  let p=String(path).replace(/\\/g,'/');
+  let full;
+  if(/^[A-Za-z]:\//.test(p)) full=p;
+  else if(/^file:\/\//i.test(p)) return p;
+  else full=base+'/'+p;
+  return 'file:///'+full.split('/').map(encodeURIComponent).join('/')+(isDir?'/':'');
+}
+function fileLink(item,host){
+  const ext=item.dir?'dir':(item.path.split('.').pop()||'file').toLowerCase();
+  return `<a class="file-link" href="${esc(fileUrl(item.path,item.dir))}">
+    <span class="ft ${ext}">${ext.toUpperCase()}</span>${mt(item.label)}${adminMode?`<button class="rm" data-path="${esc(item.path)}" data-host="${host||''}">✕</button>`:''}</a>`;
+}
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.file-link .rm');
+  if(!btn)return;
+  e.preventDefault();e.stopPropagation();
+  const host=btn.dataset.host; if(!host)return;
+  try{
+    const arr=Function('d','return d'+host)(DATA);
+    const i=arr.findIndex(x=>x.path===btn.dataset.path);
+    if(i>-1){arr.splice(i,1);DATA.updatedAt=today();markDirty();renderAll();toast('已删除该文件链接（记得保存）');}
+  }catch(err){}
+});
+
+/* ================= 渲染 ================= */
+function renderAll(){ _plist=null; renderChrome(); renderOverview(); renderActivities(); renderMembers(); renderDuty(); renderMeal(); renderRoster(); renderFiles(); }
+function renderChrome(){
+  $('#sideSub').textContent=`${DATA.site.school} · ${DATA.site.className}`;
+  $('#sideFoot').innerHTML=`数据文件：工作台数据.js<br>最近更新：${esc(DATA.updatedAt||'—')}`;
+  $('#topSub').innerHTML=`家委会工作一站式管理 · 已归档 ${DATA.activities.length} 次社会实践活动 · 数据更新 ${DATA.updatedAt||''}${adminMode?'':' · <span style="color:var(--accent);font-weight:700">🔒 隐私模式（姓名/电话/图片已脱敏）</span>'}`;
+  document.title=`家委会工作台 · ${DATA.site.school} ${DATA.site.className}`;
+}
+function renderOverview(){
+  const acts=[...DATA.activities].sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const stats=[
+    [DATA.activities.length,'社会实践活动','',''],
+    [DATA.members.length,'家委会成员','','orange'],
+    [DATA.students.length,'班级学生','','blue'],
+    [DATA.meal.records.length,'次陪餐记录','',''],
+    [DATA.duty.rows.length,'护学岗小组/周','','orange']
+  ];
+  let h=`<div class="stat-grid">${stats.map(s=>`<div class="stat ${s[3]}"><div class="num">${s[0]}</div><div class="lbl">${s[1]}</div></div>`).join('')}</div><div class="two-col"><div class="panel"><h3>活动足迹</h3><ul class="tl">`;
+  acts.forEach(a=>{
+    const c=a.fields.find(f=>f.k==='活动内容');
+    h+=`<li><span class="d">${mt(a.dateShow||a.date)}</span> · <span class="t">${mt(a.title)}</span>${c?`<span class="s"> — ${mt(c.v.slice(0,40))}…</span>`:''}</li>`;
+  });
+  h+=`</ul>${DATA.overviewNote?`<div class="note blue">${mth(DATA.overviewNote)}</div>`:''}</div><div>
+  <div class="panel"><h3>近期动态 <button class="btn admin-only ghost small" onclick="editNews()">＋ 添加</button></h3><ul class="tl">`;
+  DATA.news.forEach((n,i)=>{ h+=`<li><span class="d">${mt(n.d)}</span> · <span class="t">${mt(n.t)}</span>${n.s?`<span class="s"> — ${mt(n.s)}</span>`:''}${adminMode?` <button class="ib del" onclick="delNews(${i})">✕</button>`:''}</li>`; });
+  h+=`</ul></div><div class="panel"><h3>工作提示 <button class="btn admin-only ghost small" onclick="editTips()">✏️ 编辑</button></h3><div style="font-size:13.5px;color:var(--text2);line-height:2">`;
+  const marks='①②③④⑤⑥⑦⑧⑨⑩';
+  DATA.tips.forEach((t,i)=>h+=`${marks[i]||'·'} ${mth(t)}<br>`);
+  h+=`</div></div></div></div>`;
+  $('#overviewBody').innerHTML=h;
+}
+function renderActivities(){
+  const sem1=DATA.activities.filter(a=>a.semester==='sem1').length, sem2=DATA.activities.filter(a=>a.semester==='sem2').length;
+  $('#actFilter').innerHTML=`
+    <span class="chip on" data-f="all">全部（${DATA.activities.length}）</span>
+    <span class="chip" data-f="sem1">上学期（${sem1}）</span>
+    <span class="chip" data-f="sem2">下学期（${sem2}）</span>
+    <span class="chip" data-f="open">展开全部</span>
+    <button class="btn admin-only primary small" style="margin-left:auto" onclick="actForm()">＋ 添加活动</button>`;
+  const sorted=[...DATA.activities].sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  $('#actList').innerHTML=sorted.map((a,idx)=>{
+    const statusBadge=a.status==='已完成'?'<span class="badge done">已完成</span>':`<span class="badge plan">${esc(a.status||'进行中')}</span>`;
+    let body='';
+    a.fields.forEach(f=>{ body+=`<span class="k">${mt(f.k)}</span><span class="v">${mt(f.v)}</span>`; });
+    const groups=a.groups&&a.groups.length?`<table class="duty-mini"><tr><th>分组</th><th>成员</th></tr>${a.groups.map(g=>`<tr><td><b>${mt(g.name)}</b></td><td>${mt(g.members)}</td></tr>`).join('')}</table>`:'';
+    const photos=a.photos&&a.photos.length?`<div class="photo-wall">${a.photos.map((p,i)=>`<div class="ph"><img src="${esc(p)}" alt="${esc(a.title)}照片${i+1}" onclick="lbOpen(this.src)"><button class="rm" onclick="delPhoto('${a.id}',${i})">✕</button></div>`).join('')}</div>`:'';
+    const files=a.files&&a.files.length?`<div class="file-links">${a.files.map(f=>fileLink(f,`.activities.find(x=>x.id==='${a.id}').files`)).join('')}</div>`:'';
+    return `<div class="act-card ${a.semester==='sem2'?'sem2':''}" data-sem="${esc(a.semester)}" data-kw="${esc(a.kw||'')} ${esc(a.title)}">
+      <div class="act-head">
+        <div class="no">${idx+1}</div>
+        <div class="tt">${mt(a.title)}${a.semLabel?`<span class="badge sem">${mt(a.semLabel)}</span>`:''}${statusBadge}</div>
+        <div class="meta">${mt(a.dateShow||a.date)}</div>
+        ${adminMode?`<span style="display:flex;gap:6px" onclick="event.stopPropagation()"><button class="ib" onclick="actForm('${a.id}')">✏️</button><button class="ib del" onclick="delAct('${a.id}')">🗑</button></span>`:''}
+        <span class="arrow">▼</span>
+      </div>
+      <div class="act-body"><div class="kv">${body}</div>${photos}${groups}${files}
+      ${a.note?`<div class="note">${mt(a.note)}</div>`:''}
+      ${adminMode?`<div style="margin-top:12px"><label class="btn ghost small" style="cursor:pointer">📷 添加照片<input type="file" accept="image/*" multiple hidden onchange="addPhotos('${a.id}',this)"></label></div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  $$('.act-head').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+  bindActFilter();
+}
+function renderMembers(){
+  let h=`<div class="panel"><h3>组织架构与职责（${esc(DATA.site.className)}家委会名册）<button class="btn admin-only ghost small" style="margin-left:auto" onclick="memberForm()">＋ 添加成员</button></h3><div class="member-grid">`;
+  DATA.members.forEach(m=>{
+    h+=`<div class="member-card" data-kw="${esc(m.name)} ${esc(m.role)}">
+      <div class="mops"><button class="ib" onclick="memberForm('${m.id}')">✏️</button><button class="ib del" onclick="delMember('${m.id}')">🗑</button></div>
+      <div class="top"><div class="avatar">${esc(m.avatar||m.name[0])}</div><div><div class="name">${mt(m.name)} <span class="role-tag ${m.roleClass||''}">${esc(m.role)}</span></div>${m.phone?`<div class="phone">📞 ${mt(m.phone)}</div>`:''}</div></div>
+      <div class="duty">${mt(m.duty)}</div></div>`;
+  });
+  h+=`</div><div class="note blue">📁 原始登记表：${fileLink({path:DATA.memberSourceFile,label:'家委会成员信息登记表'})}</div></div>`;
+  $('#membersBody').innerHTML=h;
+}
+function renderDuty(){
+  const d=DATA.duty;
+  const rows=d.rows.map((r,i)=>`<tr><td>${mt(r.date)}</td><td><b>${mt(r.leader)}</b></td><td>${mt(r.members)} <span class="op"><button class="ib" onclick="dutyForm(${i})">✏️</button><button class="ib del" onclick="delDuty(${i})">🗑</button></span></td></tr>`).join('');
+  $('#dutyBody').innerHTML=`<div class="two-col">
+    <div class="panel"><h3>值周安排（${mt(d.week)}）<button class="btn admin-only ghost small" style="margin-left:auto" onclick="dutyForm()">＋ 添加值周行</button></h3>
+    <table class="data"><tr><th style="width:110px">日期</th><th style="width:90px">组长</th><th>成员</th></tr>${rows}</table>
+    <div class="note">⚠️ 值岗要求：${d.notes.map((n,i)=>`${i+1}、${mth(n)}`).join('；')}。</div></div>
+    <div class="panel"><h3>值岗安排表（原件）</h3>
+    ${d.images.map(im=>`<div class="img-frame" style="margin-bottom:10px"><img src="${esc(im.src)}" alt="${esc(im.label)}" onclick="lbOpen(this.src)"></div>`).join('')}
+    <div class="file-links">${d.files.map(f=>fileLink(f,'.duty.files')).join('')}</div>
+    ${d.tip?`<div class="note blue">${mth(d.tip)}</div>`:''}</div></div>`;
+}
+function renderMeal(){
+  const m=DATA.meal;
+  let h=`<div class="panel"><h3>学校陪餐实施方案（要点）<button class="btn admin-only ghost small" style="margin-left:auto" onclick="mealRulesForm()">✏️ 编辑要点</button></h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;font-size:13.5px">
+  ${m.rules.map(r=>`<div style="background:#f7f9f7;border-radius:10px;padding:14px 16px"><b>${mth(r.k)}</b><br>${mth(r.v)}</div>`).join('')}</div></div>
+  <div class="panel"><h3>本班陪餐记录（共 ${m.records.length} 次）<button class="btn admin-only ghost small" style="margin-left:auto" onclick="mealForm()">＋ 添加记录</button></h3>
+  <table class="data"><tr><th style="width:170px">日期</th><th>陪餐家长</th><th>备注</th><th style="width:80px"></th></tr>
+  ${m.records.map((r,i)=>`<tr><td>${mt(r.date)}</td><td>${mt(r.parents)}</td><td>${mt(r.note||'')}</td><td><span class="op"><button class="ib" onclick="mealForm(${i})">✏️</button><button class="ib del" onclick="delMeal(${i})">🗑</button></span></td></tr>`).join('')}
+  </table>
+  ${m.nextTip?`<div class="note">${mth(m.nextTip)} <button class="btn admin-only ghost small" onclick="mealTipForm()">✏️</button></div>`:''}
+  <div style="margin-top:10px;font-size:12.5px;color:var(--text2)">原始记录：${fileLink({path:m.sourceFile,label:'陪餐情况.txt'})}</div></div>`;
+  $('#mealBody').innerHTML=h;
+}
+function renderRoster(){
+  const kids=DATA.jiaweiKids||[];
+  let h=`<div class="panel"><h3>${esc(DATA.site.className)}学生名录（${DATA.students.length}人）<button class="btn admin-only ghost small" style="margin-left:auto" onclick="studentForm()">＋ 添加学生</button><button class="btn admin-only ghost small" onclick="studentBulk()">＋ 批量导入</button></h3>
+  <div class="legend"><span><i style="background:var(--primary)"></i>1组</span><span><i style="background:var(--blue)"></i>2组</span><span><i style="background:var(--accent)"></i>3组</span><span><i style="background:#7a6a45"></i>家委会成员子女</span><span style="margin-left:auto">${adminMode?'管理模式：点学生卡片 ✎ 改分组 / ✕ 删除':''}</span></div>
+  <div class="student-grid">${DATA.students.map((s,i)=>{
+    const cls=kids.includes(s.name)?'gk':(s.group||'');
+    return `<div class="stu ${cls}" data-kw="${esc(s.name)}"><span class="n">${i+1}</span>${mt(s.name)}${adminMode?`<span class="sops"><button onclick="studentForm(${i})" title="编辑">✎</button><button class="del" onclick="delStudent(${i})" title="删除">✕</button></span>`:''}</div>`;
+  }).join('')}</div></div>
+  <div class="two-col"><div class="panel"><h3>名单原件</h3>
+  ${DATA.rosterImages.map(im=>`<div class="img-frame" style="margin-bottom:10px"><img src="${esc(im.src)}" alt="${esc(im.label)}" onclick="lbOpen(this.src)"></div>`).join('')}
+  <div class="file-links">${DATA.rosterImages.filter(i=>i.file).map(i=>fileLink({path:i.file,label:i.label})).join('')}</div></div>
+  <div class="panel"><h3>名册说明 <button class="btn admin-only ghost small" onclick="rosterNotesForm()">✏️ 编辑</button></h3>
+  <div style="font-size:13.5px;color:var(--text2);line-height:2">· ${DATA.rosterNotes.map(mth).join('；<br>· ')}。<br>· 电子花名册：${fileLink({path:DATA.rosterFile,label:'社会实践花名册'})}</div></div></div>`;
+  $('#rosterBody').innerHTML=h;
+}
+function renderFiles(){
+  let h=`<div class="panel"><h3>材料文件夹总览<button class="btn admin-only ghost small" style="margin-left:auto" onclick="fileGroupForm()">＋ 添加分组</button></h3>
+  <div class="note blue" style="margin-top:0;margin-bottom:14px">💡 链接指向 <b>${esc(DATA.site.baseDir)}</b>。移动材料文件夹后请在管理模式点「🗂 材料库路径」更新；若发送给他人，请连同整个材料文件夹一起迁移。</div>`;
+  DATA.fileGroups.forEach((g,gi)=>{
+    h+=`<div style="font-weight:800;color:var(--primary-dark);margin:18px 0 8px;font-size:14px">📂 ${esc(g.name)}${adminMode?` <button class="ib" onclick="fileGroupForm(${gi})">✏️</button><button class="ib del" onclick="delFileGroup(${gi})">🗑</button>`:''}</div>
+    <div class="file-links" style="margin-top:0">${g.items.map(it=>fileLink(it,`.fileGroups[${gi}].items`)).join('')}${adminMode?`<button class="btn ghost small" onclick="fileItemForm(${gi})">＋ 文件</button>`:''}</div>`;
+  });
+  $('#filesBody').innerHTML=h+'</div>';
+}
+
+/* ================= 导航 / 筛选 / 搜索 / 灯箱 ================= */
+const titles={'sec-overview':'总览面板','sec-activities':'活动档案','sec-members':'家委会成员','sec-duty':'护学岗','sec-meal':'陪餐管理','sec-roster':'班级名录','sec-files':'材料库'};
+function bindNav(){
+  $$('.nav-item').forEach(n=>n.onclick=()=>{
+    $$('.nav-item').forEach(x=>x.classList.remove('active'));
+    $$('.section').forEach(x=>x.classList.remove('active'));
+    n.classList.add('active');
+    $('#'+n.dataset.target).classList.add('active');
+    $('#topTitle').textContent=titles[n.dataset.target];
+    window.scrollTo({top:0});
+  });
+}
+function bindActFilter(){
+  $$('#actFilter .chip').forEach(c=>c.onclick=()=>{
+    const f=c.dataset.f;
+    if(f==='open'){
+      const anyClosed=$$('.act-card').some(x=>!x.classList.contains('open'));
+      $$('.act-card').forEach(x=>{if(!x.classList.contains('hidden-by-search'))x.classList.toggle('open',anyClosed)});
+      c.textContent=anyClosed?'收起全部':'展开全部'; return;
+    }
+    $$('#actFilter .chip').forEach(x=>{if(x.dataset.f!=='open')x.classList.remove('on')});
+    c.classList.add('on');
+    const q=$('#globalSearch').value.trim();
+    $$('.act-card').forEach(card=>{
+      const show=f==='all'||card.dataset.sem===f;
+      card.classList.toggle('hidden-by-search',!(show&&(!q||matchKw(card,q))));
+    });
+  });
+}
+function matchKw(el,q){ return (el.dataset.kw||'').toLowerCase().includes(q.toLowerCase())||el.textContent.includes(q); }
+$('#globalSearch').addEventListener('input',e=>{
+  const q=e.target.value.trim();
+  if(!q){$$('.hidden-by-search').forEach(x=>x.classList.remove('hidden-by-search'));$('#actEmpty').style.display='none';return;}
+  $$('.act-card').forEach(c=>c.classList.toggle('hidden-by-search',!matchKw(c,q)));
+  $$('.member-card').forEach(c=>c.classList.toggle('hidden-by-search',!matchKw(c,q)));
+  $$('.stu').forEach(c=>c.classList.toggle('hidden-by-search',!matchKw(c,q)));
+  const vis=$$('.act-card:not(.hidden-by-search)').length;
+  $('#actEmpty').style.display=vis?'none':'block';
+  const inMem=$$('.member-card:not(.hidden-by-search)').length>0;
+  const inStu=$$('.stu:not(.hidden-by-search)').length>0;
+  const target=vis?'sec-activities':(inMem?'sec-members':(inStu?'sec-roster':null));
+  if(target&&document.querySelector('.section.active').id!==target){$(`.nav-item[data-target="${target}"]`).click();}
+});
+function lbOpen(src){ $('#lightbox img').src=src; $('#lightbox').classList.add('show'); }
+$('#lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')e.currentTarget.classList.remove('show')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#lightbox').classList.remove('show');closeModal();}});
+
+/* ================= 模态框 ================= */
+function openModal(html){ $('#modalBox').innerHTML=html; $('#modalMask').classList.add('show'); }
+function closeModal(){ $('#modalMask').classList.remove('show'); }
+$('#modalMask').addEventListener('click',e=>{if(e.target.id==='modalMask')closeModal();});
+function modalFoot(saveFn){ return `<div class="modal-foot"><button class="btn ghost" onclick="closeModal()">取消</button><button class="btn primary" onclick="${saveFn}">保存</button></div>`; }
+function frow(a,b,ph1,ph2){ return `<div class="frow"><input type="text" placeholder="${ph1}" value="${esc(a)}"><input type="text" placeholder="${ph2}" value="${esc(b)}"><button class="rmrow" onclick="this.parentElement.remove()">✕</button></div>`; }
+function readRows(id){ return [...document.querySelectorAll('#'+id+' .frow')].map(r=>({a:r.children[0].value.trim(),b:r.children[1].value.trim()})).filter(x=>x.a||x.b); }
+function addRow(id,ph1,ph2){ document.getElementById(id).insertAdjacentHTML('beforeend',frow('', '',ph1,ph2)); }
+
+/* ================= 活动表单 ================= */
+function actForm(id){
+  const a=id?DATA.activities.find(x=>x.id===id):null;
+  openModal(`<h3>${a?'编辑活动':'添加新活动'}</h3>
+  <div class="fg"><label>活动名称 *</label><input type="text" id="fTitle" value="${esc(a?.title||'')}"></div>
+  <div class="frow" style="margin-top:4px">
+    <div class="fg" style="flex:1"><label>开始日期（用于排序）</label><input type="date" id="fDate" value="${esc(a?.date||'')}"></div>
+    <div class="fg" style="flex:1"><label>日期展示文字</label><input type="text" id="fDateShow" value="${esc(a?.dateShow||'')}" placeholder="如：2026年10月17日（周六）"></div>
+  </div>
+  <div class="frow">
+    <div class="fg" style="flex:1"><label>学期归属</label><select id="fSem">
+      <option value="sem1" ${a?.semester!=='sem2'?'selected':''}>上学期</option>
+      <option value="sem2" ${a?.semester==='sem2'?'selected':''}>下学期</option></select></div>
+    <div class="fg" style="flex:1"><label>学期标注</label><input type="text" id="fSemLabel" value="${esc(a?.semLabel||'')}" placeholder="如：上学期 · 第4次"></div>
+    <div class="fg" style="flex:1"><label>状态</label><select id="fStatus">
+      ${['已完成','进行中','计划中'].map(s=>`<option ${a?.status===s||(!a&&s==='计划中')?'selected':''}>${s}</option>`).join('')}</select></div>
+  </div>
+  <div class="fg"><label>详情条目（项目名 → 内容，如 活动时间 / 活动地点 / 活动内容 / 着装要求 / 组织要点 / 家委分工）</label>
+    <div class="sub-list" id="fFields">${(a?.fields||[{k:'活动时间',v:''},{k:'活动地点',v:''},{k:'活动内容',v:''}]).map(f=>frow(f.k,f.v,'项目名','内容')).join('')}</div>
+    <button class="btn ghost small" onclick="addRow('fFields','项目名','内容')">＋ 增加条目</button></div>
+  <div class="fg"><label>分组表（可选：组名 → 成员名单）</label>
+    <div class="sub-list" id="fGroups">${(a?.groups||[]).map(g=>frow(g.name,g.members,'组名','成员，顿号分隔')).join('')}</div>
+    <button class="btn ghost small" onclick="addRow('fGroups','组名','成员')">＋ 增加分组</button></div>
+  <div class="fg"><label>附件链接（相对材料文件夹的路径 → 显示名；也可粘贴完整本地路径）</label>
+    <div class="sub-list" id="fFiles">${(a?.files||[]).map(f=>frow(f.path,f.label,'文件路径','显示名')).join('')}</div>
+    <button class="btn ghost small" onclick="addRow('fFiles','文件路径','显示名')">＋ 增加附件</button></div>
+  <div class="fg"><label>备注说明</label><textarea id="fNote">${esc(a?.note||'')}</textarea></div>
+  <div class="fg"><label>搜索关键词（空格分隔）</label><input type="text" id="fKw" value="${esc(a?.kw||'')}"></div>
+  ${modalFoot(`saveAct('${id||''}')`)}`);
+}
+function saveAct(id){
+  const g=s=>$('#'+s).value.trim();
+  const obj={ id:id||uid('a'), title:g('fTitle')||'未命名活动', semester:$('#fSem').value, semLabel:g('fSemLabel'),
+    date:g('fDate'), dateShow:g('fDateShow')||g('fDate'), status:$('#fStatus').value,
+    fields:readRows('fFields').map(r=>({k:r.a||'项目',v:r.b})),
+    groups:readRows('fGroups').map(r=>({name:r.a,members:r.b})),
+    files:readRows('fFiles').map(r=>({path:r.a,label:r.b||r.a.split(/[\\/]/).pop()})),
+    note:g('fNote'), kw:g('fKw') };
+  const arr=DATA.activities;
+  if(id){const i=arr.findIndex(x=>x.id===id);obj.photos=arr[i].photos;arr[i]=obj;}
+  else{obj.photos=[];arr.push(obj);}
+  DATA.updatedAt=today(); markDirty(); closeModal(); renderAll(); toast(id?'活动已更新':'活动已添加');
+}
+function delAct(id){ if(confirm('确定删除该活动？')){DATA.activities=DATA.activities.filter(x=>x.id!==id);DATA.updatedAt=today();markDirty();renderAll();} }
+function delPhoto(aid,i){ const a=DATA.activities.find(x=>x.id===aid); a.photos.splice(i,1); DATA.updatedAt=today(); markDirty(); renderAll(); }
+function addPhotos(aid,input){
+  const a=DATA.activities.find(x=>x.id===aid);
+  [...input.files].forEach(f=>{
+    const rd=new FileReader();
+    rd.onload=e=>{ const img=new Image(); img.onload=()=>{
+      const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height));
+      const cv=document.createElement('canvas'); cv.width=Math.round(img.width*sc); cv.height=Math.round(img.height*sc);
+      cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+      a.photos.push(cv.toDataURL('image/jpeg',0.82)); DATA.updatedAt=today(); markDirty(); renderAll();
+      toast('照片已添加（保存数据后永久写入）');
+    }; img.src=e.target.result; };
+    rd.readAsDataURL(f);
+  });
+  input.value='';
+}
+/* ================= 成员 ================= */
+function memberForm(id){
+  const m=id?DATA.members.find(x=>x.id===id):null;
+  openModal(`<h3>${m?'编辑成员':'添加成员'}</h3>
+  <div class="fg"><label>姓名（如：××爸爸 / ××妈妈，多人用 · 分隔）*</label><input type="text" id="mName" value="${esc(m?.name||'')}"></div>
+  <div class="frow">
+    <div class="fg" style="flex:1"><label>岗位</label><input type="text" id="mRole" value="${esc(m?.role||'')}" placeholder="如：会长 / 志愿者"></div>
+    <div class="fg" style="flex:1"><label>标签颜色</label><select id="mCls">${[['默认绿',''],['蓝色','r2'],['橙色','r3'],['棕色','r4']].map(o=>`<option value="${o[1]}" ${m?.roleClass===o[1]?'selected':''}>${o[0]}</option>`).join('')}</select></div>
+    <div class="fg" style="width:90px"><label>头像字</label><input type="text" id="mAv" value="${esc(m?.avatar||'')}" maxlength="2"></div>
+  </div>
+  <div class="fg"><label>联系方式</label><input type="text" id="mPhone" value="${esc(m?.phone||'')}"></div>
+  <div class="fg"><label>职责说明</label><textarea id="mDuty" rows="4">${esc(m?.duty||'')}</textarea></div>
+  ${modalFoot(`saveMember('${id||''}')`)}`);
+}
+function saveMember(id){
+  const g=s=>$('#'+s).value.trim();
+  if(!g('mName'))return;
+  const obj={id:id||uid('m'),name:g('mName'),role:g('mRole')||'成员',roleClass:$('#mCls').value,avatar:g('mAv')||g('mName').slice(0,1),phone:g('mPhone'),duty:g('mDuty')};
+  if(id){const i=DATA.members.findIndex(x=>x.id===id);DATA.members[i]=obj;}else DATA.members.push(obj);
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('成员已保存');
+}
+function delMember(id){ if(confirm('确定删除该成员？')){DATA.members=DATA.members.filter(x=>x.id!==id);DATA.updatedAt=today();markDirty();renderAll();} }
+/* ================= 学生 ================= */
+function studentForm(i){
+  const s=(i!==undefined&&i>=0)?DATA.students[i]:null;
+  openModal(`<h3>${s?`编辑学生（第${i+1}号）`:'添加学生'}</h3>
+  <div class="fg"><label>姓名 *</label><input type="text" id="sName" value="${esc(s?.name||'')}"></div>
+  <div class="fg"><label>活动分组标记</label><select id="sGroup">
+    ${[['无',''],['1组','g1'],['2组','g2'],['3组','g3']].map(o=>`<option value="${o[1]}" ${s?.group===o[1]?'selected':''}>${o[0]}</option>`).join('')}</select></div>
+  ${modalFoot(`saveStudent(${i===undefined?-1:i})`)}`);
+}
+function saveStudent(i){
+  const name=$('#sName').value.trim(); if(!name)return;
+  const obj={name,group:$('#sGroup').value};
+  if(i>=0)DATA.students[i]=obj;else DATA.students.push(obj);
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('学生名录已更新');
+}
+function delStudent(i){ const s=DATA.students[i]; if(confirm(`确定从名录中删除「${s.name}」？`)){DATA.students.splice(i,1);DATA.updatedAt=today();markDirty();renderAll();} }
+function studentBulk(){
+  openModal(`<h3>批量导入学生</h3>
+  <div class="fg"><label>粘贴名单（用 、逗号、空格或换行分隔；同名自动跳过）</label><textarea id="bNames" rows="6" placeholder="张三、李四、王五…"></textarea></div>
+  <div class="fg"><label>统一分组标记</label><select id="bGroup">${[['无',''],['1组','g1'],['2组','g2'],['3组','g3']].map(o=>`<option value="${o[1]}">${o[0]}</option>`).join('')}</select></div>
+  ${modalFoot('saveBulk()')}`);
+}
+function saveBulk(){
+  const names=$('#bNames').value.split(/[、,，;；\s\n]+/).filter(Boolean);
+  let added=0;
+  names.forEach(n=>{ if(!DATA.students.some(s=>s.name===n)){DATA.students.push({name:n,group:$('#bGroup').value});added++;} });
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast(`新增 ${added} 名学生`);
+}
+function rosterNotesForm(){
+  openModal(`<h3>名册说明（每行一条）</h3><div class="fg"><textarea id="rnText" rows="6">${esc(DATA.rosterNotes.join('\n'))}</textarea></div>${modalFoot('saveNotes()')}`);
+}
+function saveNotes(){ DATA.rosterNotes=$('#rnText').value.split('\n').map(x=>x.trim()).filter(Boolean); DATA.updatedAt=today(); markDirty(); closeModal(); renderAll(); toast('说明已更新'); }
+/* ================= 陪餐 ================= */
+function mealForm(i){
+  const r=(i!==undefined&&i>=0)?DATA.meal.records[i]:null;
+  openModal(`<h3>${r?'编辑陪餐记录':'添加陪餐记录'}</h3>
+  <div class="fg"><label>日期（如 2026-09-15 周二）*</label><input type="text" id="rDate" value="${esc(r?.date||'')}"></div>
+  <div class="fg"><label>陪餐家长 *</label><input type="text" id="rParents" value="${esc(r?.parents||'')}" placeholder="两位家长，顿号分隔"></div>
+  <div class="fg"><label>备注</label><input type="text" id="rNote" value="${esc(r?.note||'')}"></div>
+  ${modalFoot(`saveMeal(${i===undefined?-1:i})`)}`);
+}
+function saveMeal(i){
+  const g=s=>$('#'+s).value.trim();
+  const obj={date:g('rDate'),parents:g('rParents'),note:g('rNote')};
+  if(!obj.date||!obj.parents)return;
+  if(i>=0)DATA.meal.records[i]=obj;else DATA.meal.records.push(obj);
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('陪餐记录已保存');
+}
+function delMeal(i){ if(confirm('删除该陪餐记录？')){DATA.meal.records.splice(i,1);DATA.updatedAt=today();markDirty();renderAll();} }
+function mealRulesForm(){
+  openModal(`<h3>陪餐方案要点（每行一条，格式：标题 | 内容，支持 &lt;b&gt; 加粗）</h3>
+  <div class="fg"><textarea id="mrText" rows="8">${esc(DATA.meal.rules.map(r=>r.k+' | '+r.v).join('\n'))}</textarea></div>${modalFoot('saveMealRules()')}`);
+}
+function saveMealRules(){
+  DATA.meal.rules=$('#mrText').value.split('\n').map(l=>{const p=l.split('|');return p.length>1?{k:p[0].trim(),v:p.slice(1).join('|').trim()}:null;}).filter(Boolean);
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('要点已更新');
+}
+function mealTipForm(){
+  openModal(`<h3>下一轮提示（支持 &lt;b&gt; 加粗）</h3><div class="fg"><textarea id="mtText" rows="3">${esc(DATA.meal.nextTip||'')}</textarea></div>${modalFoot('saveMealTip()')}`);
+}
+function saveMealTip(){ DATA.meal.nextTip=$('#mtText').value.trim(); DATA.updatedAt=today();markDirty();closeModal();renderAll(); }
+/* ================= 护学岗 ================= */
+function dutyForm(i){
+  const r=(i!==undefined&&i>=0)?DATA.duty.rows[i]:null;
+  openModal(`<h3>${r?'编辑值周行':'添加值周行'}</h3>
+  <div class="fg"><label>日期（如 3月23日 周一）*</label><input type="text" id="dDate" value="${esc(r?.date||'')}"></div>
+  <div class="fg"><label>组长 *</label><input type="text" id="dLeader" value="${esc(r?.leader||'')}"></div>
+  <div class="fg"><label>成员（顿号分隔）*</label><textarea id="dMembers" rows="2">${esc(r?.members||'')}</textarea></div>
+  ${modalFoot(`saveDuty(${i===undefined?-1:i})`)}`);
+}
+function saveDuty(i){
+  const g=s=>$('#'+s).value.trim();
+  const obj={date:g('dDate'),leader:g('dLeader'),members:g('dMembers')};
+  if(!obj.date)return;
+  if(i>=0)DATA.duty.rows[i]=obj;else DATA.duty.rows.push(obj);
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('值周安排已保存');
+}
+function delDuty(i){ if(confirm('删除该值周行？')){DATA.duty.rows.splice(i,1);DATA.updatedAt=today();markDirty();renderAll();} }
+/* ================= 总览动态/提示 ================= */
+function editNews(){
+  openModal(`<h3>添加近期动态</h3>
+  <div class="fg"><label>时间标签</label><input type="text" id="nD" placeholder="如 2026-10-01（周四）"></div>
+  <div class="fg"><label>内容</label><input type="text" id="nT"></div>
+  <div class="fg"><label>补充说明</label><input type="text" id="nS"></div>${modalFoot('saveNews()')}`);
+}
+function saveNews(){ const g=s=>$('#'+s).value.trim(); if(g('nT')){DATA.news.push({d:g('nD'),t:g('nT'),s:g('nS')});DATA.updatedAt=today();markDirty();closeModal();renderAll();} }
+function delNews(i){ if(confirm('删除该条动态？')){DATA.news.splice(i,1);DATA.updatedAt=today();markDirty();renderAll();} }
+function editTips(){
+  openModal(`<h3>工作提示（每行一条）</h3><div class="fg"><textarea id="tpText" rows="6">${esc(DATA.tips.join('\n'))}</textarea></div>${modalFoot('saveTips()')}`);
+}
+function saveTips(){ DATA.tips=$('#tpText').value.split('\n').map(x=>x.trim()).filter(Boolean); DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('提示已更新'); }
+/* ================= 材料库 ================= */
+function fileGroupForm(i){
+  const g=(i!==undefined&&i>=0)?DATA.fileGroups[i]:null;
+  openModal(`<h3>${g?'编辑分组名称':'添加材料分组'}</h3><div class="fg"><label>分组名称</label><input type="text" id="gName" value="${esc(g?.name||'')}"></div>${modalFoot(`saveFileGroup(${i===undefined?-1:i})`)}`);
+}
+function saveFileGroup(i){ const n=$('#gName').value.trim(); if(!n)return;
+  if(i>=0)DATA.fileGroups[i].name=n;else DATA.fileGroups.push({name:n,items:[]});
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();
+}
+function delFileGroup(i){ if(confirm(`删除分组「${DATA.fileGroups[i].name}」及其链接？（不会删除磁盘上的文件）`)){DATA.fileGroups.splice(i,1);DATA.updatedAt=today();markDirty();renderAll();} }
+function fileItemForm(gi){
+  openModal(`<h3>向「${esc(DATA.fileGroups[gi].name)}」添加文件</h3>
+  <div class="fg"><label>路径（相对材料文件夹，或完整本地路径）*</label><input type="text" id="fiPath" placeholder="如：6、秋游活动/活动方案.docx"></div>
+  <div class="fg"><label>显示名</label><input type="text" id="fiLabel"></div>
+  <div class="fg"><label style="display:flex;align-items:center;gap:8px;font-weight:400"><input type="checkbox" id="fiDir" style="width:auto"> 这是一个文件夹</label></div>
+  ${modalFoot(`saveFileItem(${gi})`)}`);
+}
+function saveFileItem(gi){ const p=$('#fiPath').value.trim(); if(!p)return;
+  DATA.fileGroups[gi].items.push({path:p,label:$('#fiLabel').value.trim()||p.split(/[\\/]/).pop(),dir:$('#fiDir').checked||undefined});
+  DATA.updatedAt=today();markDirty();closeModal();renderAll();toast('文件链接已添加');
+}
+/* ================= 保存 / 备份 ================= */
+function today(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function serialize(){
+  return `/* ============================================================
+   家委会工作台 · 数据文件（可编辑）
+   本文件由工作台「管理模式 → 保存数据」自动生成/更新。
+   手工编辑也完全可以：改完刷新浏览器即可生效。
+   ============================================================ */\nwindow.JW_DATA = ` + JSON.stringify(DATA,null,2) + ';\n';
+}
+function download(name,text){
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'text/javascript;charset=utf-8'})); a.download=name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+async function saveData(){
+  const content=serialize();
+  if(window.showSaveFilePicker){
+    try{
+      if(!savedHandle) savedHandle=await showSaveFilePicker({suggestedName:'工作台数据.js',types:[{description:'JS 数据文件',accept:{'text/javascript':['.js']}}]});
+      const w=await savedHandle.createWritable(); await w.write(content); await w.close();
+      clearDirty(); toast('✅ 已直接写入文件，刷新页面即生效'); return;
+    }catch(e){ if(e.name==='AbortError'){toast('已取消写入（也可改用下载方式）');return;} }
+  }
+  download('工作台数据.js',content);
+  clearDirty();
+  toast('已下载 工作台数据.js — 请复制到「家委会工作台」文件夹覆盖同名文件，然后刷新页面');
+}
+$('#btnSave').onclick=saveData;
+$('#btnExport').onclick=()=>{ download('家委会工作台备份_'+today()+'.json',JSON.stringify(DATA,null,2)); toast('备份 JSON 已导出'); };
+$('#btnImport').onclick=()=>$('#jsonFileInput').click();
+$('#jsonFileInput').onchange=e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const rd=new FileReader();
+  rd.onload=ev=>{ try{
+    const obj=JSON.parse(ev.target.result);
+    if(!obj.activities||!obj.students)throw new Error('bad');
+    DATA=obj; savedHandle=null; DATA.updatedAt=today(); markDirty(); renderAll(); toast('✅ 备份已导入 — 请点「💾 保存数据」写回文件');
+  }catch{ toast('导入失败：文件格式不正确'); } };
+  rd.readAsText(f); e.target.value='';
+};
+$('#btnBaseDir').onclick=()=>{
+  openModal(`<h3>材料库根路径</h3>
+  <div class="fg"><label>「一中家委会-材料」文件夹位置（移动后更新此处，全部链接即恢复可用）</label><input type="text" id="bdText" value="${esc(DATA.site.baseDir)}"></div>
+  ${modalFoot('saveBaseDir()')}`);
+};
+function saveBaseDir(){ DATA.site.baseDir=$('#bdText').value.trim(); DATA.updatedAt=today(); markDirty(); closeModal(); renderAll(); toast('材料库路径已更新'); }
+/* ================= 管理模式开关（需密码） ================= */
+function setAdmin(v){
+  adminMode=v;
+  document.body.classList.toggle('admin',adminMode);
+  $('#adminToggle').textContent=adminMode?'🔒 退出管理':'✏️ 管理模式';
+  $('#adminToggle').classList.toggle('warn',adminMode);
+  renderAll();
+  toast(adminMode?'管理模式已开启：全部信息可见，可增删改维护；改完请点「💾 保存数据」':'已退出管理模式，姓名/电话/图片已自动脱敏');
+}
+$('#adminToggle').onclick=()=>{
+  if(adminMode){ setAdmin(false); return; }
+  openModal(`<h3>🔐 管理模式验证</h3>
+  <div class="fg"><label>请输入管理密码</label><input type="password" id="pwdIn" autocomplete="off" onkeydown="if(event.key==='Enter')checkPwd()"></div>
+  <div style="font-size:12px;color:var(--text2)">密码由家委会会长保管，用于解锁完整信息与编辑功能。</div>
+  ${modalFoot('checkPwd()')}`);
+  setTimeout(()=>$('#pwdIn').focus(),80);
+};
+function checkPwd(){
+  const ok=$('#pwdIn') && $('#pwdIn').value===String(DATA.site.adminPassword||'jiawei-demo');
+  if(ok){ closeModal(); setAdmin(true); }
+  else toast('❌ 密码不正确');
+}
+/* ================= 启动 ================= */
+if(!DATA||!DATA.activities){
+  document.body.innerHTML='<h2 style="padding:40px;font-family:sans-serif">未找到 工作台数据.js — 请确认它与本 HTML 文件在同一文件夹内。</h2>';
+}else{ bindNav(); renderAll(); }
+</script>
+</body>
+</html>
