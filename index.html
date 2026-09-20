@@ -352,7 +352,7 @@ function renderOverview(){
   $('#overviewBody').innerHTML=h;
 }
 function renderActivities(){
-  const sem1=DATA.activities.filter(a=>a.semester==='sem1').length, sem2=DATA.activities.filter(a=>a.semester==='sem2').length;
+  const sem1=DATA.activities.filter(a=>a.semester==='sem1').length, sem2=DATA.activities.filter(a=>a.semester==='sem2').length, sem3=DATA.activities.filter(a=>a.semester==='sem3').length;
   $('#actFilter').innerHTML=`
     <span class="chip on" data-f="all">全部（${DATA.activities.length}）</span>
     <span class="chip" data-f="sem1">上学期（${sem1}）</span>
